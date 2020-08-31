@@ -1,24 +1,59 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
+| Column                | Type   | Options     |
+| --------------------- | ------ | ----------- |
+| nickname              | string | null: false |
+| email                 | string | nill: false |
+| password              | string | null: false |
+| password_confirmation | stirng | null: false |
 
-Things you may want to cover:
+### Association
+has_many :items
+has_many :comments
 
-* Ruby version
 
-* System dependencies
+## itemsモデル
+| Column  | Type    | Options                        |
+| ------- | ------- | ------------------------------ |
+| title   | string  | null: false                    |
+| image   | string  | null: false                    |
+| price   | integer | null :false                    |
+| user_id | integer | null: false, foreign_key: true |
 
-* Configuration
+### Association
+belongs_to :users
+has_many :comments
+has_one :customer
 
-* Database creation
 
-* Database initialization
+## Comments
+| Column  | Type    | Options                        |
+| ------- | ------- | ------------------------------ |
+| text    | string  | null: false                    |
+| item_id | string  | null: false, foreign_key:true  |
+| user_id | integer | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
+belongs_to :users
+belongs_to :items
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Customers
+| Column  | Type    | Options                        |
+| ------- | ------- | ------------------------------ |
+| item_id | integer | null: false, foreign_key: true |
 
-* ...
+### Association
+belongs_to :items
+has_one: addresses
+
+
+## Addresses
+| Column      | Type    | Options                        |
+| ----------- | ------- | ------------------------------ |
+| address     | string  | null: false                    |
+| customer_id | integer | null: false, foreign_key: true |
+
+### Association
+belongs_to :customers
