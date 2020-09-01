@@ -10,7 +10,7 @@
 
 ### Association
 has_many :items
-has_many :comments
+has_many :customers
 
 
 ## itemsモデル
@@ -22,31 +22,19 @@ has_many :comments
 | user_id | integer | null: false, foreign_key: true |
 
 ### Association
-belongs_to :users
-has_many :comments
+belongs_to :user
 has_one :customer
-
-
-## Comments
-| Column  | Type    | Options                        |
-| ------- | ------- | ------------------------------ |
-| text    | string  | null: false                    |
-| item_id | string  | null: false, foreign_key:true  |
-| user_id | integer | null: false, foreign_key: true |
-
-### Association
-belongs_to :users
-belongs_to :items
 
 
 ## Customers
 | Column  | Type    | Options                        |
 | ------- | ------- | ------------------------------ |
 | item_id | integer | null: false, foreign_key: true |
+| user_id | integer | null: false, foreign_key: true |
 
 ### Association
-belongs_to :items
-has_one: addresses
+belongs_to :item
+has_one: address
 
 
 ## Addresses
@@ -56,4 +44,4 @@ has_one: addresses
 | customer_id | integer | null: false, foreign_key: true |
 
 ### Association
-belongs_to :customers
+belongs_to :customer
