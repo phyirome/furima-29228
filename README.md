@@ -11,9 +11,8 @@
 | first_name            | string | null:false  |
 | kana_family_name      | string | null:false  |
 | kana_first_name       | string | null:false  |
-| birth_year_id         | string | null:false  |
-| birth_month_id        | string | null:false  |
-| birth_day_id          | string | null:false  |
+| birthday_id           | date   | null:false  |
+
 
 ### Association
 has_many :items
@@ -23,7 +22,7 @@ has_many :purchases
 ## itemsモデル
 | Column        | Type    | Options                        |
 | ------------- | ------- | ------------------------------ |
-| item_name     | string  | null: false                    |
+| name          | string  | null: false                    |
 | image         | string  | null: false                    |
 | price         | integer | null :false                    |
 | text          | string  | null:false                     |
@@ -52,13 +51,13 @@ has_one: address
 
 
 ## Addresses
-| Column        | Type    | Options     |
-| ------------- | ------- | ----------- |
-| postal_code   | string  | null:false  |
-| address       | string  | null: false |
-| building_name | string  |             |
-| phone_number  | integer | null:false  |
-| prefecture_id | integer | null: false |
+| Column        | Type    | Options                        |
+| ------------- | ------- | ------------------------------ |
+| postal_code   | string  | null:false                     |
+| address       | string  | null: false                    |
+| building_name | string  |                                |
+| phone_number  | integer | null:false                     |
+| prefecture_id | integer | null: false, foreign_key: true |
 
 ### Association
 belongs_to :purchase
