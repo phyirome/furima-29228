@@ -15,7 +15,8 @@
 
 
 ### Association
-has_many :items  has_many :purchases
+has_many :items  
+has_many :purchases
 
 
 ## itemsモデル
@@ -32,7 +33,7 @@ has_many :items  has_many :purchases
 | shipping_days_id (AH) | integer |                   |
 
 ### Association
-belongs_to :user
+belongs_to :user  
 has_one :purchase
 
 
@@ -43,8 +44,8 @@ has_one :purchase
 | user_id | integer | foreign_key: true |
 
 ### Association
-belongs_to :item
-belongs_to :user
+belongs_to :item  
+belongs_to :user  
 has_one: address
 
 
