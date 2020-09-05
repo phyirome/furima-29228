@@ -29,7 +29,7 @@
 | text                  | string  | null: false       |
 | user_id               | integer | foreign_key: true |
 | category_id (AH)      | integer | null: false       |
-| prefecture_id (AH)    | integer | null: false       |
+| condition_id (AH)     | integer | null: false       |
 | shipping_fee_id (AH)  | integer | null: false       |
 | shipping_from_id (AH) | integer | null: false       |
 | shipping_day_id (AH)  | integer | null: false       |
