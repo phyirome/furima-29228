@@ -1,5 +1,7 @@
 # README
 
+# テーブル設計
+
 ## usersテーブル
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
@@ -15,26 +17,26 @@
 
 
 ### Association
-has_many :items
-has_many :purchases
+- has_many :items
+- has_many :purchases
 
 
 ## itemsモデル
 | Column                | Type    | Options           |
 | --------------------- | ------- | ----------------- |
 | name                  | string  | null: false       |
-| price                 | integer | null :false       |
-| text                  | string  | null:false        |
+| price                 | integer | null: false       |
+| text                  | string  | null: false       |
 | user_id               | integer | foreign_key: true |
-| category_id (AH)      | integer |                   |
-| prefecture_id (AH)    | integer |                   |
-| shipping_fee_id (AH)  | integer |                   |
-| shipping_from_id (AH) | integer |                   |
-| shipping_days_id (AH) | integer |                   |
+| category_id (AH)      | integer | null: false       |
+| prefecture_id (AH)    | integer | null: false       |
+| shipping_fee_id (AH)  | integer | null: false       |
+| shipping_from_id (AH) | integer | null: false       |
+| shipping_days_id (AH) | integer | null: false       |
 
 ### Association
-belongs_to :user
-has_one :purchase
+- belongs_to :user
+- has_one :purchase
 
 
 ## Purchases
@@ -44,21 +46,21 @@ has_one :purchase
 | user_id | integer | foreign_key: true |
 
 ### Association
-belongs_to :item
-belongs_to :user
-has_one: address
+- belongs_to :item
+- belongs_to :user
+- has_one: address
 
 
 ## Addresses
 | Column             | Type    | Options           |
 | ------------------ | ------- | ----------------- |
-| postal_code        | string  | null:false        |
+| postal_code        | string  | null: false       |
 | prefecture_id (AH) | integer | null: false       |
 | city               | string  | null: false       |
 | address            | string  | null: false       |
 | building_name      | string  |                   |
-| phone_number       | integer | null:false        |
+| phone_number       | integer | null: false       |
 | purchase_id        | integer | foreign_key: true |
 
 ### Association
-belongs_to :purchase
+- belongs_to :purchase
