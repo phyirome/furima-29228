@@ -32,7 +32,7 @@
 | prefecture_id (AH)    | integer | null: false       |
 | shipping_fee_id (AH)  | integer | null: false       |
 | shipping_from_id (AH) | integer | null: false       |
-| shipping_days_id (AH) | integer | null: false       |
+| shipping_day_id (AH)  | integer | null: false       |
 
 ### Association
 - belongs_to :user
