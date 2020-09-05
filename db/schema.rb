@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_09_05_013504) do
     t.integer "condition_id", null: false
     t.integer "shipping_fee_id", null: false
     t.integer "shipping_from_id", null: false
-    t.integer "shippng_day_id", null: false
+    t.integer "shipping_day_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
