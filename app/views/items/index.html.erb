@@ -137,7 +137,7 @@
 
               <%# 商品が売れていればsold outを表示しましょう %>
               <% if item.purchase != nil %>
-              <%# アソシエーションを利用してpurchasesからレコードを取得する。売れている→レコードは存在する。レコードが入っているかいないか（’いない場合はnil）。戻り値true/falseによって判定しても良い。!! item.purchase == nilのとき、item.purchase.item_idは定義されないため、undifined method errorが生じる。 %>
+              <%# アソシエーションを利用してpurchasesからレコードを取得する。売れている→レコードは存在する。レコードが入っているかいないか（’いない場合はnil）。戻り値true/falseによって判定しても良い。!! item.purchase == nilのとき、item.purchase.item_idは定義されないため、undefined method errorが生じる。 %>
                 <div class='sold-out'>
                   <span>Sold Out!!</span>
                 </div>
