@@ -20,6 +20,5 @@ class Item < ApplicationRecord
 
   validates :price, numericality: { less_than_or_equal_to: 9_999_999, message: 'は9,999,999円以下に設定してください' }
 
-  validates :image, presence: { message: 'を添付してください'}
-
+  validates :image, presence: { message: 'を添付してください' }
 end
