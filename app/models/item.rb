@@ -10,7 +10,15 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_fee
   belongs_to_active_hash :shipping_from
 
-  validates :category, :condition, :shipping_day, :shipping_fee, :shipping_from, presence: true
+  validates :name, :price, :text, presence: { message: 'が空欄です' }
 
-  validates :name, :price, :text, :category_id, :condition_id, :shipping_day_id, :shipping_fee_id, :shipping_from_id, numericality: { other_than: 0 }
+  validates :category_id, :condition_id, :shipping_day_id, :shipping_fee_id, :shipping_from_id, presence: true, numericality: { other_than: 0, message: 'を選択してください' }
+
+  validates :price, numericality: { message: 'は半角数字で入力してください' }
+
+  validates :price, numericality: { greater_than_or_equal_to: 300, message: 'は300円以上に設定してください' }
+
+  validates :price, numericality: { less_than_or_equal_to: 9_999_999, message: 'は9,999,999円以下に設定してください' }
+
+  validates :image, presence: { message: 'を添付してください' }
 end
