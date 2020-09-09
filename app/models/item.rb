@@ -19,5 +19,4 @@ class Item < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 300, message: 'は300円以上に設定してください' }
 
   validates :price, numericality: { less_than_or_equal_to: 9_999_999, message: 'は9,999,999円以下に設定してください' }
-  
 end
