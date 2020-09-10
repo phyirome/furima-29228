@@ -20,6 +20,15 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
   end
+  
+  def destroy
+    item = Item.find(params[:id])
+    if item.destroy
+      redirect_to root_path
+    else
+      flash.now[:alert] = '削除に失敗しました。'
+    end
+  end
 
   private
 
