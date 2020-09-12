@@ -19,6 +19,7 @@ class PurchaseAddress
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
     # ↑.create(テーブルのカラム名1: フォームのname属性1, テーブルのカラム名2, フォームのname属性2 )
     Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, building: building, phone_number: phone_number)
+    # ↑ビューファイルの対応するformの、たとえばprefectureなら:prefecture_idというキーと同一にする。
   end
 
 end

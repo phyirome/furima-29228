@@ -1,18 +1,19 @@
 class PurchasesController < ApplicationController
   before_action :move_to_login_page
   before_action :move_to_top_page
+  # before_action :move_to_top_page_if_item_bought
 
   def index
     @item = Item.find(params[:item_id])
-    @purchase_address = PurchaseAddress.new(address_params)
+    @purchase_address = PurchaseAddress.new
     # @item = Purchase.item_id.find(params[:id])
-    # binding.pry
   end
   
   def create
-    @purchase = Purchase.new(purchase_params)
+    # @purchase = Purchase.new(purchase_params)
+    # binding.pry
     @purchase_address = PurchaseAddress.new(address_params)
-    if @purchase.valid?
+    if @purchase_address.valid?
       pay_item
       @purchase.save
       @purchase_address.save
@@ -40,6 +41,11 @@ class PurchasesController < ApplicationController
     redirect_to root_path if current_user.id == @item.user_id
     # @item.purchase != 0
   end
+
+  # def move_to_top_page_if_item_bought
+  #   @item = Item.find(params[:item_id])
+  #   redirect_to root_path if @item.purchase != 0
+  # end
 
   def purchase_params
     params.permit(:item_id, :token)
