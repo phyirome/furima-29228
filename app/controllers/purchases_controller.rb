@@ -11,12 +11,12 @@ class PurchasesController < ApplicationController
   
   def create
     # @purchase = Purchase.new(purchase_params)
-    # binding.pry
     @purchase_address = PurchaseAddress.new(address_params)
     if @purchase_address.valid?
       pay_item
-      @purchase.save
+      # @purchase.save
       @purchase_address.save
+      # binding.pry
       redirect_to root_path
     else
       render :index
@@ -28,7 +28,7 @@ class PurchasesController < ApplicationController
   def address_params
     # binding.pry
     # params.require(:purchase).permit(:postal_code,:city,:building,:address,:phone_number,:prefecture_id).merge(item_id: Item.find(params[:item_id]), user_id: current_user.id )
-    params.permit(:postal_code,:city,:building,:address,:phone_number,:prefecture_id, :item_id).merge(user_id: current_user.id)
+    params.permit(:postal_code,:city,:building,:address,:phone_number,:prefecture_id, :item_id, :token).merge(user_id: current_user.id)
     # .merge(item_id: Item.find(params[:item_id]), user_id: current_user.id )
   end
   
@@ -41,21 +41,23 @@ class PurchasesController < ApplicationController
     redirect_to root_path if current_user.id == @item.user_id
     # @item.purchase != 0
   end
-
+  
   # def move_to_top_page_if_item_bought
   #   @item = Item.find(params[:item_id])
   #   redirect_to root_path if @item.purchase != 0
   # end
-
+  
   def purchase_params
-    params.permit(:item_id, :token)
+    params.permit(:token)
   end
 
   def pay_item
+    # binding.pry
+    @item = Item.find(params[:item_id])
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # PAY.JPテスト秘密鍵
     Payjp::Charge.create(
-      amount: order_params[:price],  # 商品の値段
-      card: order_params[:token],    # カードトークン
+      amount: @item.price,  # 商品の値段
+      card: purchase_params[:token],    # カードトークン
       currency:'jpy'                 # 通貨の種類(日本円)
     )
   end
