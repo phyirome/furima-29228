@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :move_to_login_page
-  before_action :move_to_top_page
-  # before_action :move_to_top_page_if_item_bought
+  before_action :move_to_top_page_if_item_is_his
+  before_action :move_to_top_page_if_item_sold_out
 
   def index
     @item = Item.find(params[:item_id])
@@ -36,16 +36,16 @@ class PurchasesController < ApplicationController
     redirect_to new_user_session_path unless user_signed_in?
   end
   
-  def move_to_top_page
+  def move_to_top_page_if_item_is_his
     @item = Item.find(params[:item_id])
     redirect_to root_path if current_user.id == @item.user_id
     # @item.purchase != 0
   end
   
-  # def move_to_top_page_if_item_bought
-  #   @item = Item.find(params[:item_id])
-  #   redirect_to root_path if @item.purchase != 0
-  # end
+  def move_to_top_page_if_item_sold_out
+    @item = Item.find(params[:item_id])
+    redirect_to root_path if @item.purchase != nil
+  end
   
   def purchase_params
     params.permit(:token)
