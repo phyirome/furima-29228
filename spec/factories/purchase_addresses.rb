@@ -4,6 +4,7 @@ FactoryBot.define do
     # card_cvd { '123' }
     # card_exp_month { '3' }
     # card_exp_year { '23' }
+    # ↑の記述が必要ないのは、これらの代わりにトークンを用意しているから。
     token {'aaaaaaaaaaaaaaaaa'}
     # カード情報を入力しない代わりにトークンを発行する。カード情報はPayJPに送られた後、トークンとしてサーバーへ返却される。
     postal_code { '123-4567' }

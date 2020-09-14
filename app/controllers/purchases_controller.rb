@@ -4,19 +4,16 @@ class PurchasesController < ApplicationController
   before_action :move_to_top_page_if_item_sold_out
 
   def index
-    @item = Item.find(params[:item_id])
     @purchase_address = PurchaseAddress.new
-    # @item = Purchase.item_id.find(params[:id])
+    # @item = Item.find(params[:item_id])
+    # ↑これは不要。
   end
   
   def create
-    # @purchase = Purchase.new(purchase_params)
     @purchase_address = PurchaseAddress.new(address_params)
     if @purchase_address.valid?
       pay_item
-      # @purchase.save
-      @purchase_address.save
-      # binding.pry
+      @purchase_address.
       redirect_to root_path
     else
       render :index
@@ -26,10 +23,8 @@ class PurchasesController < ApplicationController
   private
 
   def address_params
-    # binding.pry
-    # params.require(:purchase).permit(:postal_code,:city,:building,:address,:phone_number,:prefecture_id).merge(item_id: Item.find(params[:item_id]), user_id: current_user.id )
     params.permit(:postal_code,:city,:building,:address,:phone_number,:prefecture_id, :item_id, :token).merge(user_id: current_user.id)
-    # .merge(item_id: Item.find(params[:item_id]), user_id: current_user.id )
+    # メモ。最初はこうした。params.require(:purchase).permit(:postal_code,:city,:building,:address,:phone_number,:prefecture_id).merge(item_id: Item.find(params[:item_id]), user_id: current_user.id )
   end
   
   def move_to_login_page
@@ -39,7 +34,6 @@ class PurchasesController < ApplicationController
   def move_to_top_page_if_item_is_his
     @item = Item.find(params[:item_id])
     redirect_to root_path if current_user.id == @item.user_id
-    # @item.purchase != 0
   end
   
   def move_to_top_page_if_item_sold_out
@@ -52,7 +46,6 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item
-    # binding.pry
     @item = Item.find(params[:item_id])
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # PAY.JPテスト秘密鍵
     Payjp::Charge.create(
