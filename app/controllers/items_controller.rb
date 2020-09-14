@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_item, only: [:edit, :show, :update]
+  before_action :set_item, only: [:show, :update]
+  before_action :move_to_index_if_item_sold_out, only: [:edit]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -54,5 +55,10 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_index_if_item_sold_out
+    @item = Item.find(params[:id])
+    redirect_to root_path unless @item.purchase.nil?
   end
 end
