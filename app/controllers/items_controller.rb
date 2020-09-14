@@ -59,6 +59,6 @@ class ItemsController < ApplicationController
 
   def move_to_index_if_item_sold_out
     @item = Item.find(params[:id])
-    redirect_to root_path if @item.purchase != nil
+    redirect_to root_path unless @item.purchase.nil?
   end
 end
