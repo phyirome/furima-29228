@@ -19,7 +19,10 @@ RSpec.describe PurchaseAddress, type: :model do
     context '商品の購入がうまくいくとき' do
       it 'すべての値が正しく入力されていれば購入できる' do
         expect(@purchase_address).to be_valid
-        # binding.pry
+      end
+      it 'buildingは空でも購入できる' do
+        @purchase_address.building = nil
+        expect(@purchase_address).to be_valid
       end
     end
 
